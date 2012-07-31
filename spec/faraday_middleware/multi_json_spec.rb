@@ -1,18 +1,24 @@
 require 'spec_helper'
 
 describe FaradayMiddleware::MultiJson do
-  it 'parses the response body' do
-    body = ::MultiJson.dump a: 1, b: 2
+  let(:json) { ::MultiJson.dump(a:1, b:2) }
 
-    connection = Faraday.new do |conn|
-      conn.response :multi_json
-      conn.adapter :test do |stub|
+  def connection(options={})
+    Faraday.new do |builder|
+      builder.response :multi_json, options
+      builder.adapter :test do |stub|
         stub.get('/') do
-          [200, {}, body]
+          [200, {}, json]
         end
       end
     end
+  end
 
-    connection.get('/').body.should == { a: 1, b: 2 }
+  it 'should parse the response body' do
+    connection.get('/').body.should == {'a'=>1, 'b'=>2}
+  end
+
+  it 'should delegate options given by builder' do
+    connection(symbolize_keys: true).get('/').body.should == {a:1, b:2}
   end
 end

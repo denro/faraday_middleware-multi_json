@@ -1,6 +1,6 @@
 # FaradayMiddleware::MultiJson
 
-TODO: Write a gem description
+A simple Faraday middleware that parses JSON responses with MultiJson for unobtrusiveness.
 
 ## Installation
 
@@ -18,7 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The same as FaradayMiddleware::ParseJson:
+
+```
+require 'faraday_middleware/multi_json'
+
+connection = Faraday.new do |conn|
+  conn.response :multi_json
+  conn.adapter  Faraday.default_adapter
+end
+
+connection.get('http://example.com/example.json')
+```
+
+### Passing parser options
+
+```
+conn.response :multi_json, symbolize_keys: true
+```
 
 ## Contributing
 
