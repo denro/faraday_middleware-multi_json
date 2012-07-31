@@ -10,4 +10,4 @@ module FaradayMiddleware
   end
 end
 
-Faraday.register_middleware :response, :multi_json => FaradayMiddleware::MultiJson
+Faraday.register_middleware :response, multi_json: FaradayMiddleware::MultiJson
