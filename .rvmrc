@@ -1,1 +1,1 @@
-rvm use --create ruby-1.9.3@faraday_middleware-multi_json
+rvm use --create ruby-1.9.3-p194@faraday_middleware-multi_json
