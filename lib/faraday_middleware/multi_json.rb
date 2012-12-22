@@ -14,8 +14,8 @@ module FaradayMiddleware
     class EncodeJson < FaradayMiddleware::EncodeJson
       dependency 'multi_json'
       
-      def initialize(*args)
-        super(args.first)
+      def initialize(app, *)
+        super(app)
       end
       
       def encode(data)
