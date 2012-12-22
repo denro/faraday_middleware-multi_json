@@ -28,9 +28,9 @@ describe FaradayMiddleware::MultiJson::EncodeJson do
   let(:request) { {:a => 1, :b => 2} }
   let(:json) { ::MultiJson.dump(request) }
 
-  def connection(options={})
+  def connection
     Faraday.new do |builder|
-      builder.request :multi_json, options
+      builder.request :multi_json
       builder.adapter :test do |stub|
         stub.post('/update', json) do
           [200, {}, json]
