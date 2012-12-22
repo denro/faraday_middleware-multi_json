@@ -1,5 +1,3 @@
-script: script/test
-
 language: ruby
 
 rvm:
