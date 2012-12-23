@@ -42,6 +42,22 @@ end
 conn.response :multi_json, symbolize_keys: true
 ```
 
+### Upgrading to 0.0.5+
+
+The class name for the middleware changed, so if you had this before:
+
+```ruby
+connection = Faraday.new do |conn|
+  conn.use FaradayMiddleware::MultiJson
+end
+```
+Change to:
+```ruby
+connection = Faraday.new do |conn|
+  conn.response :multi_json
+end
+```
+
 ## Contributing
 
 1. Fork it
