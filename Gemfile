@@ -4,3 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'json', :platforms => [:ruby_18, :jruby]
+
+gem 'rake', :group => :test
