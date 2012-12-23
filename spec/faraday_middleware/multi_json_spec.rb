@@ -1,7 +1,8 @@
 require 'spec_helper'
 
-describe FaradayMiddleware::MultiJson do
-  let(:json) { ::MultiJson.dump(a:1, b:2) }
+describe FaradayMiddleware::MultiJson::ParseJson do
+  let(:response) { {:a => 1, :b => 2} }
+  let(:json) { ::MultiJson.dump(response) }
 
   def connection(options={})
     Faraday.new do |builder|
@@ -19,6 +20,27 @@ describe FaradayMiddleware::MultiJson do
   end
 
   it 'should delegate options given by builder' do
-    connection(symbolize_keys: true).get('/').body.should == {a:1, b:2}
+    connection(:symbolize_keys => true).get('/').body.should == response
+  end
+end
+
+describe FaradayMiddleware::MultiJson::EncodeJson do
+  let(:request) { {:a => 1, :b => 2} }
+  let(:json) { ::MultiJson.dump(request) }
+
+  def connection
+    Faraday.new do |builder|
+      builder.request :multi_json
+      builder.adapter :test do |stub|
+        stub.post('/update', json) do
+          [200, {}, json]
+        end
+      end
+    end
+  end
+
+  it 'should parse the request body' do
+    resp = connection.post('/update', request)
+    resp.body.should == json
   end
 end
