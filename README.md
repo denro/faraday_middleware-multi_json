@@ -1,6 +1,6 @@
 # FaradayMiddleware::MultiJson
 
-A simple Faraday middleware that parses JSON responses with MultiJson for unobtrusiveness.
+Simple Faraday middleware that uses MultiJson to unobtrusively encode JSON requests and parse JSON responses.
 
 ## Installation
 
@@ -20,20 +20,25 @@ Or install it yourself as:
 
 The same as FaradayMiddleware::ParseJson:
 
-```
+```ruby
 require 'faraday_middleware/multi_json'
 
 connection = Faraday.new do |conn|
+  conn.request :multi_json
   conn.response :multi_json
   conn.adapter  Faraday.default_adapter
 end
 
 connection.get('http://example.com/example.json')
+
+resp = connection.post 'http://example.com/example.json' do |req|
+  req.body = {:hello => 'world'}
+end
 ```
 
 ### Passing parser options
 
-```
+```ruby
 conn.response :multi_json, symbolize_keys: true
 ```
 
