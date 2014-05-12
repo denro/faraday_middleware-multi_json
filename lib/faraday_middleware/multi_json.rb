@@ -25,5 +25,5 @@ module FaradayMiddleware
   end
 end
 
-Faraday.register_middleware :response, :multi_json => FaradayMiddleware::MultiJson::ParseJson
-Faraday.register_middleware :request, :multi_json => FaradayMiddleware::MultiJson::EncodeJson
+Faraday::Response.register_middleware :multi_json => FaradayMiddleware::MultiJson::ParseJson
+Faraday::Request.register_middleware :multi_json => FaradayMiddleware::MultiJson::EncodeJson
