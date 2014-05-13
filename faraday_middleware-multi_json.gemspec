@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = 'faraday_middleware-multi_json'
   gem.require_paths = ['lib']
-  gem.version       = '0.0.5'
+  gem.version       = '0.0.6'
 
   gem.add_dependency 'faraday_middleware'
   gem.add_dependency 'multi_json'
