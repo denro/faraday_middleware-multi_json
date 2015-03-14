@@ -6,6 +6,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Faraday response parser using MultiJson}
   gem.summary       = %q{Response JSON parser using MultiJson and FaradayMiddleware}
   gem.homepage      = 'https://www.github.com/denro/faraday_middleware-multi_json'
+  gem.licenses      = ['MIT']
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
